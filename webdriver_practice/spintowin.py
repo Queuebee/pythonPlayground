@@ -101,7 +101,7 @@ def bank(driver):
         element = driver.find_element_by_xpath("//form/div/div/span[@onclick='safe_number(1)']")
         for i in range(4):
             alilbit = randy(1,5)
-            element.click(alilbit)
+            element.click()
             time.sleep(alilbit)
         time.sleep(1)
         
