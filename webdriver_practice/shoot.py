@@ -37,32 +37,50 @@ def is_shootable(target_stylestring):
     #   left    between 0px and 480px
     s = target_stylestring
     print('hi:',s)
-    return True
-        
+    mess = s.split(' ')
+    x = int(mess[3].strip('px;'))
+    y = int(mess[5].strip('px;'))
+
+    if 0 < x < 280:
+        if 0 < y < 480:
+            return True
+        else:
+            return False
+    else:
+        return False
+
     
-    
-    t = target_element
 def pewpew(username, passw):
     driver = webdriver.Firefox()
     login(driver, username, passw)
     print("Walking to the shooting range...")
     driver.get('http://www.maffiaworld.nl/shooting')
     time.sleep(1)
-    element = driver.find_element_by_id('info') # start 'button'
-    gameover = driver.find_element_by_xpath("//*[@id='gameover']")
+    startbutton = driver.find_element_by_id('info') # start 'button'
+    gameover = driver.find_element_by_xpath("//*[@id='gameover']") # TRYING TO FIND BY XPATH IKNOW SHUTUP
     if gameover.is_displayed():
         print("found gameover")
+        driver.quit()
     else:
-        element.click()
-        targets = driver.find_elements_by_xpath("//div[contains(., 'target')]")
+        targets = []
+        for i in range(50):
+            try:
+                target = driver.find_element_by_id('target'+str(i))
+                targets.append(target)
+            except NoSuchElementException:
+                pass
+        startbutton.click()
         print(len(targets),"targets found!")
         while not gameover.is_displayed():
             print("gameover?:",gameover.is_displayed())
             for target in targets:
                 print("finding target...")
                 if target.is_displayed():
-                    print(is_shootable(target.get_attribute('style').text()))
-                    #print("bang")
+                    if is_shootable(target.get_attribute("style")):
+                        target.click()
+                        print("bang")
+                    else:
+                        print("cant see target yet")
                 else:
                     print("can't find target")
                     pass
@@ -83,6 +101,7 @@ if __name__ == '__main__':
     from selenium import webdriver
     from selenium.webdriver.common.keys import Keys
     from selenium.common.exceptions import NoSuchElementException
+    
     print("__name__")
     print("from main")
     print(__name__)
