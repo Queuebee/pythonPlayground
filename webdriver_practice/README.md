@@ -1,6 +1,12 @@
 # webdriver_practice
 
-**spintowin** crapppy features:
+In here there's some scripts, used to automate certain processes
+
+**make sure to read the .example files and edit them accordingly before running the scripts**
+**never** put your credentials in a file you don't trust, #read the code first!
+
+#spintowin
+**crapppy features/TO-DO:**
 
 - get credentials from feli_creds.py
 - login to maffiaworld
@@ -22,8 +28,9 @@ features to be changed/added:
 	- [ ] test rms again
 - [ ] merge with shoot
 
+#shoot
+**crappy features/TO-DO:**
 
-**shoot** crappy features/TO-DO:
 
 - [ ] fix ElementNotInteractableException bug
 - [x] get to the shooting range
@@ -41,5 +48,11 @@ features to be changed/added:
 	- [ ] but before we merge, finish the script -_-
 
 
+#make_bullets
+**crapppy features/TO-DO:**
 
+- [x] import owned objects
+- [x] check what country you're in and whether you own that country's object
+- [x] go to bullet factory and start producing
+- [x] sleep for 2 hours
 
