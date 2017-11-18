@@ -4,6 +4,7 @@
 #### In here there's some scripts, used to automate certain processes
 #### **make sure to read the .example files and edit them accordingly before running the scripts**
 
+
 # spintowin
 **crapppy features/TO-DO:**
 
@@ -29,6 +30,9 @@
 
 
 - [ ] fix ElementNotInteractableException bug
+	- I still dont know why it does that sometimes
+	- [ ] find out why it does that
+- [x] check_prison (and escape) function
 - [x] get to the shooting range
 - [x] while not 'game over'
 - [x] find target elements

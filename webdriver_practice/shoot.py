@@ -33,6 +33,19 @@ def login(driver, username, password):
     print("successfully logged in")
     time.sleep(1)
 
+def check_prison(driver, url_back):
+    """ checks whether you're in prison, if so, buy yourself out.
+    assumes you have enough money"""
+    if 'prison' in driver.current_url:
+        print("apparently they got me...")
+        escapebutton = driver.find_element_by_xpath("/html/body/div[3]/div/div/div[2]/div[3]/div/table/tbody/tr[2]/td[10]/a/img")
+        escapebutton.click()
+        print("but I can buy myself out")
+        driver.get(url_back)
+        time.sleep(1)
+    else:
+        print("not in prison :)")
+
 def is_shootable(target_stylestring):
     """ test if the x and y coordinates of a target are within shootable/clickable range"""
     # target locations should be:
@@ -57,6 +70,7 @@ def pewpew(driver, username, passw):
     #login(driver, username, passw) # removed for testing purposes n stuff
     print("Walking to the shooting range...") 
     driver.get('http://www.maffiaworld.nl/shooting')
+    check_prison(driver, 'http://www.maffiaworld.nl/shooting')        
     time.sleep(1)
     startbutton = driver.find_element_by_id('info') # start 'button'
     gameover = driver.find_element_by_xpath("//*[@id='gameover']") # TRYING TO FIND BY XPATH IKNOW SHUTUP
