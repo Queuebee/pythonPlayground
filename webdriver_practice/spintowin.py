@@ -54,6 +54,7 @@ def  spin_wheel(driver):
         print("wheel not found, I'll try again later...")
     else:
         print("click!")
+    time.sleep(2)
     print("refreshing page")
     driver.get("http://www.maffiaworld.nl/wheel-of-fortune")
     
@@ -69,7 +70,7 @@ def bank(driver):
     
     print('bank:',bank)
     
-    
+    mills = 0
     # first check if 1m+ on bank
     if bank > 1000000:
         mills = str(bank // 1000000) + '000000'
@@ -83,6 +84,7 @@ def bank(driver):
         element = driver.find_element_by_name("withdraw")
         element.click()
         print("withdrew",mills)
+        time.sleep(1)
 
     element = driver.get('http://www.maffiaworld.nl/safe')
     time.sleep(1)
@@ -94,18 +96,18 @@ def bank(driver):
     if cash > 1000000:
         mills = str(cash // 1000000) + '000000'
         print('got',mills,'in my pocket')
+        #this is a temporary measure because banking is useless tbh and to
+        #donate to family we need the capatcha solver up and running first. what a state.
         element = driver.find_element_by_xpath("//form/div/div/span[@onclick='safe_number(1)']")
-        element.click()
-        time.sleep(1)
-        element.click()
-        time.sleep(1)
-        element.click()
-        time.sleep(1)
-        element.click()
+        for i in range(4):
+            alilbit = randy(1,5)
+            element.click()
+            time.sleep(alilbit)
         time.sleep(1)
         
         element = driver.find_element_by_name("amount") #formfield
         element.clear()
+        time.sleep(1)
         element.send_keys(mills)
         try:
             element = driver.find_element_by_name("deposit")
@@ -113,10 +115,11 @@ def bank(driver):
             print("donated",mills)
         except NoSuchElementException:
             print("can't find deposit button men")
-            pass
+            raise NoSuchElementException("iveneverraisedanerrorbeforethisiswrongiknowshutup")
         else:
             pass
-    return True
+        return True, mills
+    return False, 0
     
 def test():
     
@@ -133,12 +136,12 @@ def spin_and_bank(username, password):
         spin_wheel(driver)
         spinned += 1
         print("spinned the wheel...",spinned,"times!")
-        banked = bank(driver)
+        banked, mills = bank(driver)
         if banked:
-            print("I banked")
+            print("I banked", mills)
         print("going into hibernation...")
         driver.quit()
-        timeout = randy(1800, 2400)
+        timeout = randy(1810, 1845)
         time.sleep(timeout)
         print("woke up after",timeout,"seconds!")
     
@@ -162,10 +165,14 @@ if __name__ == '__main__':
         username = input("username:")
         password = getpass.getpass("password:")
 
-    spin_and_bank(username, password) # this is a while loop so it wont
-                                      # continue after here man
+    #heehoo
+    try:
+        spin_and_bank(username, password)
+    except NoSuchElementException:
+        print("something went wrong but I don't care and I will rerun myself")
+        spin_and_bank(username, password)
         
-
+    
 
 
 
