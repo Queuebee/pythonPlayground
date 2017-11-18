@@ -2,5 +2,6 @@
 
 /[nN]ocommit/*
 /webdriver_practice/feli_credits.py
+/webdriver_practice/owned_objects.py
 __pycache__
 *.log
