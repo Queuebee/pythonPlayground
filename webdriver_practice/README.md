@@ -1,20 +1,19 @@
 # webdriver_practice
 
-In here there's some scripts, used to automate certain processes
+#### In here there's some scripts, used to automate certain processes
 
-**make sure to read the .example files and edit them accordingly before running the scripts**
-**never** put your credentials in a file you don't trust, #read the code first!
 
-#spintowin
+#### **make sure to read the .example files and edit them accordingly before running the scripts**
+# **never** put your credentials in a file you don't trust, 
+## read the code first!
+
+# spintowin
 **crapppy features/TO-DO:**
 
-- get credentials from feli_creds.py
-- login to maffiaworld
-- spin the wheel of fortune (VIP)
-- put money in safe (needs 50cred safe, code 1111)
-
-features to be changed/added:
-
+- [x] get credentials from feli_creds.py
+- [x] login to maffiaworld
+- [x] spin the wheel of fortune (VIP)
+- [x] put money in safe (needs 50cred safe, code 1111)
 - [x] login
 - [x] spin wheel
 - [ ] bank: <del>withdraw</del>, deposit
@@ -28,7 +27,7 @@ features to be changed/added:
 	- [ ] test rms again
 - [ ] merge with shoot
 
-#shoot
+# shoot
 **crappy features/TO-DO:**
 
 
@@ -48,7 +47,7 @@ features to be changed/added:
 	- [ ] but before we merge, finish the script -_-
 
 
-#make_bullets
+# make_bullets
 **crapppy features/TO-DO:**
 
 - [x] import owned objects
