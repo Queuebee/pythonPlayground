@@ -1,4 +1,5 @@
-username = 'malse_naam'
-password = 'mals_wachtwoord'
+username = 'put_your_username_here'
+password = 'put_your_password_here'
 
-#vergeet niet .example in .py te veranderen
+#EN# don't forget to change the file extention from '.example' to '.py'
+#NL# vergeet niet de bestandsextentie '.example' in '.py' te veranderen

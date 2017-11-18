@@ -4,6 +4,7 @@ from random import randint as randy
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import ElementNotInteractableException #needs to be used still
 
     
 def getcreds():
@@ -73,16 +74,20 @@ def pewpew(driver, username, passw):
         startbutton.click()
         print(len(targets),"targets found!")
         while not gameover.is_displayed():
-            #print("gameover?:",gameover.is_displayed())
+            print("gameover?:",gameover.is_displayed())
             shots = 0
             for target in targets:
                 #print("finding target...")
-                if is_shootable(target.get_attribute("style")):
-                    target.click()
-                    shots +=1
-                    print(random.choice(['pew','pewpew',"bang"]))
+                if target.is_displayed(): # this seems to prevent ElementNotInteractableException
+                    if is_shootable(target.get_attribute("style")):
+                        target.click()
+                        shots +=1
+                        print("bang")
+                    else:
+                        #print("cant see target yet")
+                        pass
                 else:
-                    #print("cant see target yet")
+                    print('not interactable')
                     pass
                 
     print("I shot",shots,"times!")
@@ -101,6 +106,7 @@ if __name__ == '__main__':
     from selenium import webdriver
     from selenium.webdriver.common.keys import Keys
     from selenium.common.exceptions import NoSuchElementException
+    from selenium.common.exceptions import ElementNotInteractableException #needs to be used still
     
     print("__name__")
     print("from main")
@@ -121,7 +127,7 @@ if __name__ == '__main__':
     while True: #assumes we have the correct username and password
         print("lets shoot some stuff")
         pewpew(driver, username, password)
-        timeout = randy(120, 140)
+        timeout = randy(122, 140)
         print("sleeping for",timeout,"seconds..")
         time.sleep(timeout)
         

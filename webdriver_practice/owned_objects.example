@@ -1,0 +1,26 @@
+#########################################################################################################
+# DONT EDIT THESE UNLESS YOU SEE A TYPO
+french_f = ['France','Frankrijk','Frankreich']
+dutch_f = ['Holland','Nederland','Niederlande']
+italian_f = ['Italy','Italië','Italien']
+egyptian_f = ['Egypt','Egypte','Ägypten']
+russian_f = ['Russia','Rusland','Russland']
+chinese_f = ['China','China','China']
+german_f = ['Germany','Duitsland','Deutschland']
+brazilian_f = ['Brazil','Brazilië','Brasilien']
+spanish_f = ['Spain','Spanje','Spanien']
+belgian_f = ['Belgium','België','Belgien']
+#########################################################################################################
+# put the objects you own in here, comma separated
+
+owned_factories = []
+
+example_owned = [french_f, german_f, chinese_f] # you can delete this line
+
+
+#!!! TO DO: make some common-letter string per country.
+#           shouldn't correspond with strings in other
+#           countries tho
+
+
+

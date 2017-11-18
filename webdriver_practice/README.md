@@ -23,8 +23,9 @@ features to be changed/added:
 - [ ] merge with shoot
 
 
-**shoot** crappy features:
+**shoot** crappy features/TO-DO:
 
+- [ ] fix ElementNotInteractableException bug
 - [x] get to the shooting range
 - [x] while not 'game over'
 - [x] find target elements
@@ -36,7 +37,6 @@ features to be changed/added:
 	- [ ] maybe even make a script that
 		- [ ] flies to countries on its own
 		- [ ] buys bullets
-
 - [ ] merge with spintowin
 	- [ ] but before we merge, finish the script -_-
 
