@@ -31,8 +31,14 @@ features to be changed/added:
 - [x] extract target positions ('top' and 'left')
 - [x] click targets when they show up
 - [x] exit when 'game over' message pops up
-- [ ] add a timer to automate this every 2-3 minutes
+- [x] add a timer to automate this every 2-3 minutes
+- [ ] add a bullets check and stop shooting if theres no bullets left
+	- [ ] maybe even make a script that
+		- [ ] flies to countries on its own
+		- [ ] buys bullets
+
 - [ ] merge with spintowin
+	- [ ] but before we merge, finish the script -_-
 
 
 
