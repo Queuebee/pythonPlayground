@@ -70,7 +70,7 @@ def bank(driver):
     
     print('bank:',bank)
     
-    
+    mills = 0
     # first check if 1m+ on bank
     if bank > 1000000:
         mills = str(bank // 1000000) + '000000'
@@ -118,7 +118,8 @@ def bank(driver):
             raise NoSuchElementException("iveneverraisedanerrorbeforethisiswrongiknowshutup")
         else:
             pass
-    return True
+        return True, mills
+    return False, 0
     
 def test():
     
@@ -135,9 +136,9 @@ def spin_and_bank(username, password):
         spin_wheel(driver)
         spinned += 1
         print("spinned the wheel...",spinned,"times!")
-        banked = bank(driver)
+        banked, mills = bank(driver)
         if banked:
-            print("I banked")
+            print("I banked", mills)
         print("going into hibernation...")
         driver.quit()
         timeout = randy(1810, 1845)
