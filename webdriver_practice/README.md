@@ -1,11 +1,8 @@
-# webdriver_practice
-
+## webdriver_practice
+# **never** put your credentials in a file you don't trust 
+#### read the code first
 #### In here there's some scripts, used to automate certain processes
-
-
 #### **make sure to read the .example files and edit them accordingly before running the scripts**
-# **never** put your credentials in a file you don't trust, 
-## read the code first!
 
 # spintowin
 **crapppy features/TO-DO:**
