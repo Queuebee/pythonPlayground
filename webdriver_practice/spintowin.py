@@ -140,7 +140,7 @@ def spin_and_bank(username, password):
             print("I banked")
         print("going into hibernation...")
         driver.quit()
-        timeout = randy(1800, 2400)
+        timeout = randy(1810, 1845)
         time.sleep(timeout)
         print("woke up after",timeout,"seconds!")
     
