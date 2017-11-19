@@ -4,9 +4,11 @@ from random import randint as randy
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import ElementNotInteractableException #needs to be used still
 
     
 def getcreds():
+    """ get credentials """
     from feli_credits import username, password
     return username, password
 
@@ -31,12 +33,25 @@ def login(driver, username, password):
     print("successfully logged in")
     time.sleep(1)
 
+def check_prison(driver, url_back):
+    """ checks whether you're in prison, if so, buy yourself out.
+    assumes you have enough money"""
+    if 'prison' in driver.current_url:
+        print("apparently they got me...")
+        escapebutton = driver.find_element_by_xpath("/html/body/div[3]/div/div/div[2]/div[3]/div/table/tbody/tr[2]/td[10]/a/img")
+        escapebutton.click()
+        print("but I can buy myself out")
+        driver.get(url_back)
+        time.sleep(1)
+    else:
+        print("not in prison :)")
+
 def is_shootable(target_stylestring):
+    """ test if the x and y coordinates of a target are within shootable/clickable range"""
     # target locations should be:
     #   top     between 0px and 280px
     #   left    between 0px and 480px
     s = target_stylestring
-    print('hi:',s)
     mess = s.split(' ')
     x = int(mess[3].strip('px;'))
     y = int(mess[5].strip('px;'))
@@ -50,11 +65,12 @@ def is_shootable(target_stylestring):
         return False
 
     
-def pewpew(username, passw):
-    driver = webdriver.Firefox()
-    login(driver, username, passw)
-    print("Walking to the shooting range...")
+def pewpew(driver, username, passw):
+    """automatically shoots targets at the shootingrange"""
+    #login(driver, username, passw) # removed for testing purposes n stuff
+    print("Walking to the shooting range...") 
     driver.get('http://www.maffiaworld.nl/shooting')
+    check_prison(driver, 'http://www.maffiaworld.nl/shooting')        
     time.sleep(1)
     startbutton = driver.find_element_by_id('info') # start 'button'
     gameover = driver.find_element_by_xpath("//*[@id='gameover']") # TRYING TO FIND BY XPATH IKNOW SHUTUP
@@ -73,34 +89,38 @@ def pewpew(username, passw):
         print(len(targets),"targets found!")
         while not gameover.is_displayed():
             print("gameover?:",gameover.is_displayed())
+            shots = 0
             for target in targets:
-                print("finding target...")
-                if target.is_displayed():
+                #print("finding target...")
+                if target.is_displayed(): # this seems to prevent ElementNotInteractableException
                     if is_shootable(target.get_attribute("style")):
                         target.click()
+                        shots +=1
                         print("bang")
                     else:
-                        print("cant see target yet")
+                        #print("cant see target yet")
+                        pass
                 else:
-                    print("can't find target")
+                    print('not interactable')
                     pass
-
+                
+    print("I shot",shots,"times!")
     if gameover.is_displayed():
-        print("I saw the gameover message")
-    driver.quit()            
+        print("I saw the gameover message")           
 
         
     
 
 
 if __name__ == '__main__':
-    """nignogs"""
+    """I'm too hyped to write a docstring."""
     import getpass
     import time
     from random import randint as randy
     from selenium import webdriver
     from selenium.webdriver.common.keys import Keys
     from selenium.common.exceptions import NoSuchElementException
+    from selenium.common.exceptions import ElementNotInteractableException #needs to be used still
     
     print("__name__")
     print("from main")
@@ -112,7 +132,17 @@ if __name__ == '__main__':
     else:
         username = input("username:")
         password = getpass.getpass("password:")
-
-    #heehoo
-    pewpew(username, password)
+        
+    driver = webdriver.Firefox() # handy to make it here so we can leave it on in the background
+    login(driver, username, password) # not sure how long this keeps the session alive though...
+                                      # when we merge multiple actions to be done, we could eith
+                                      # - do each action in their own browser session
+                                      # - exit the browser for each spintowin (one of the longest timeouts, 30m)
+    while True: #assumes we have the correct username and password
+        print("lets shoot some stuff")
+        pewpew(driver, username, password)
+        timeout = randy(122, 140)
+        print("sleeping for",timeout,"seconds..")
+        time.sleep(timeout)
+        
         

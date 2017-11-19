@@ -44,8 +44,7 @@ def  spin_wheel(driver):
     """"spins the wheel of mythicality"""
 
     #go to wheel of fortune and spin it
-    element = driver.find_element_by_link_text("Geluksrad")
-    element.click()
+    driver.get("http://www.maffiaworld.nl/wheel-of-fortune")
     time.sleep(2)
     try:
         element = driver.find_element_by_name("submit")
